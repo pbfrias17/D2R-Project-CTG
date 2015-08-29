@@ -10,6 +10,7 @@ public class GiftGuessing : MonoBehaviour {
 	private bool gameStart;
 	public Sprite[] giftSprites;
 	private string giftType;
+	
 
 	// Use this for initialization
 	void Start () {
