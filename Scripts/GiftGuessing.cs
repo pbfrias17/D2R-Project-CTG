@@ -8,7 +8,7 @@ public class GiftGuessing : MonoBehaviour {
 	private List<string> giftStrings = new List<string>();
 	private GameObject[] giftObjects;
 	private bool gameStart;
-	private Sprite[] giftSprites;
+	private Sprite[] allSprites;
 	private string giftType;
 	private int giftAmt;
 	private int correctGiftIndex;
@@ -19,22 +19,14 @@ public class GiftGuessing : MonoBehaviour {
 		Debug.Log("Starting GiftGuessing minigame...");
 		//load all sprites, randomly pick a correct one
 		//show it to the user
-		giftSprites = Resources.LoadAll<Sprite>("Sprites/GiftGuessing/" + giftType);
+		allSprites = Resources.LoadAll<Sprite>("Sprites/GiftGuessing/" + giftType);
 		correctGiftIndex = 0;
 
 		//handle all GameObject creation via scripts
-		GameObject correctGift = new GameObject();
+		//GameObject correctGift = new GameObject();
 
 		if (GameManager.miniGameOn) {
 			//initialize gifts and sprites
-			giftAmt = 3;
-			giftObjects = new GameObject[giftAmt];
-			for (int i = 0; i < giftAmt; i++) {
-				GameObject gift = new GameObject(giftType);
-				gift.AddComponent<SpriteRenderer>();
-				gift.tag = "GiftGuess";
-				giftObjects [i] = gift;
-			}
 			LoadGifts();
 		}
 	}
@@ -45,18 +37,29 @@ public class GiftGuessing : MonoBehaviour {
 	}
 
 	void LoadGifts() {
+		int giftAmt = 3;
 		float xPos = -3.5f;
 		float xGap = 3.5f;
 		float yPos = 0f;
 		float zPos = 0f;
 		
-		foreach(GameObject gift in giftObjects) {
+		for (int i = 0; i < giftAmt; i++) {
+
+			GameObject gift = new GameObject("gift"+i);
+			gift.AddComponent<Gift>();
+			gift.tag = "GiftGuess";
+			gift.SetIndex(i);
+
+			/*gift.AddComponent<SpriteRenderer>();
+			gift.tag = "GiftGuess";
+
 			SpriteRenderer SR = gift.GetComponent<SpriteRenderer>();
 			Transform T = gift.GetComponent<Transform>();
 			T.transform.position = new Vector3(xPos, yPos, zPos);
 			T.transform.localScale = new Vector3(2.5f, 2.5f, 1);
 			SR.sprite = giftSprites[0];
 			xPos += xGap;
+			*/
 		}
 	}
 	
