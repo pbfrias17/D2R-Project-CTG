@@ -14,7 +14,7 @@ public class Gift : MonoBehaviour {
 	}
 
 	public void SetSprite(Sprite sp) {
-		index = 3;
+
 	}
 
 	public void SetIndex(int id) {
