@@ -16,6 +16,7 @@ public class GiftGuessing : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 
+		Debug.Log("Starting GiftGuessing minigame...");
 		//load all sprites, randomly pick a correct one
 		//show it to the user
 		giftSprites = Resources.LoadAll<Sprite>("Sprites/GiftGuessing/" + giftType);
@@ -24,17 +25,12 @@ public class GiftGuessing : MonoBehaviour {
 		//handle all GameObject creation via scripts
 		GameObject correctGift = new GameObject();
 
-		//handle MiniGame
-		GameManager.StartMiniGame();
-		Debug.Log ("GM: " + GameManager.miniGameOn);
-
-
 		if (GameManager.miniGameOn) {
 			//initialize gifts and sprites
 			giftAmt = 3;
 			giftObjects = new GameObject[giftAmt];
 			for (int i = 0; i < giftAmt; i++) {
-				GameObject gift = new GameObject();
+				GameObject gift = new GameObject(giftType);
 				gift.AddComponent<SpriteRenderer>();
 				gift.tag = "GiftGuess";
 				giftObjects [i] = gift;
@@ -43,12 +39,17 @@ public class GiftGuessing : MonoBehaviour {
 		}
 	}
 
+	// Update is called once per frame
+	void Update () {
+
+	}
+
 	void LoadGifts() {
 		float xPos = -3.5f;
 		float xGap = 3.5f;
 		float yPos = 0f;
 		float zPos = 0f;
-
+		
 		foreach(GameObject gift in giftObjects) {
 			SpriteRenderer SR = gift.GetComponent<SpriteRenderer>();
 			Transform T = gift.GetComponent<Transform>();
@@ -59,8 +60,4 @@ public class GiftGuessing : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
