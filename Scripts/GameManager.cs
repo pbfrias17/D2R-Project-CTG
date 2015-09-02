@@ -24,7 +24,7 @@ public static class GameManager {
 		UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(currentGameObject, "Assets/D2R-Project-CTG/Scripts/GameManager.cs (27,3)", currentMiniGame);
 		currentGameObject.AddComponent<SpriteRenderer>();
 		SpriteRenderer background = currentGameObject.GetComponent<SpriteRenderer>();
-		background.sprite = Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/" + currentMiniGame + "bg.jpg");
+		background.sprite = Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/general/" + currentMiniGame + "bg.jpg");
 
 	}
 

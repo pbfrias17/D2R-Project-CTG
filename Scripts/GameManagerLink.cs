@@ -12,15 +12,12 @@ public class GameManagerLink : MonoBehaviour {
 	public void Init() {
 		GameManager.Init();
 		Canvas UI = (Canvas) FindObjectOfType(typeof(Canvas));
+
+		//hide main UI and start minigames
 		UI.gameObject.SetActive(false);
 		GameManager.StartMiniGame();
 	}
 
-	//handles input in-game
-	public void OnClick() {
-		GameManager.StartMiniGame();
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	
