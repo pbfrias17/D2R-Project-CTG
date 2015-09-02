@@ -9,6 +9,7 @@ public static class GameManager {
 	public static string currentMiniGame;
 	public static List<string> miniGames = new List<string>();
 	public static string[] strings;
+	public static int currentStage;
 
 	// Use this for initialization
 	public static void Init () {
@@ -17,6 +18,7 @@ public static class GameManager {
 
 	public static void StartMiniGame() {
 		miniGameOn = true;
+		currentStage = 1;
 		currentMiniGame = miniGames[0];
 		//create object that has proper mini game script
 		GameObject currentGameObject = new GameObject("background");
