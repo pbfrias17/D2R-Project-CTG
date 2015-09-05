@@ -20,10 +20,10 @@ public static class GameManager {
 		currentLives = 3;
 		miniGames.Add("GiftGuessing");
 		currentGameObject = new GameObject("background");
-		currentGameObject.transform.localScale = new Vector3(4.1f, 4f, 0f);
 		currentGameObject.AddComponent<SpriteRenderer>();
-		sr = currentGameObject.GetComponent<SpriteRenderer>();
-		sr.sprite = Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg");
+		//Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg");
+		//sr.sprite = Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg");
+		Util.ApplySpriteToObject(ref currentGameObject, Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg"));
 	}
 
 	public static void StartMiniGame() {
@@ -32,8 +32,7 @@ public static class GameManager {
 		currentMiniGame = miniGames[0];
 		//add script and sprite
 		UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(currentGameObject, "Assets/D2R-Project-CTG/Scripts/GameManager.cs (27,3)", currentMiniGame);
-		sr.sprite = Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/general/" + currentMiniGame + "bg.jpg");
-
+		Util.ApplySpriteToObject(ref currentGameObject, Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/general/" + currentMiniGame + "bg.jpg"));
 	}
 
 	public static void EndMiniGame(bool success) {
