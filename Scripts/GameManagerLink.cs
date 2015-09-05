@@ -6,11 +6,10 @@ public class GameManagerLink : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		GameManager.Init();
 	}
 
 	public void Init() {
-		GameManager.Init();
 		Canvas UI = (Canvas) FindObjectOfType(typeof(Canvas));
 
 		//hide main UI and start minigames

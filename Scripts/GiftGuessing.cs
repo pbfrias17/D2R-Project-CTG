@@ -71,26 +71,40 @@ public class GiftGuessing : MonoBehaviour {
 			tr.position = new Vector3(xPos, yPos, zPos);
 			xPos += xGap;
 			gift.tag = "GiftGuess";
+			gift.SetActive(true);
 			sr.sprite = giftSprite;
 		}
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(0)) {
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+		if(Input.GetMouseButtonDown(0)) {
+			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			
-			if (Physics.Raycast(ray, out hit)) {
-				if (hit.collider.gameObject.tag == "GiftGuess") {
-					Debug.Log( "My object is clicked by mouse");
+			if(hit.collider != null) {
+				if(IsCorrectGift(hit.collider.gameObject)) {
+					GameManager.EndMiniGame(true);
+				} else {
+					GameManager.EndMiniGame(false);
 				}
+				CleanUp();
 			} else {
-				Debug.Log(ray);
+				Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 			}
-
 		}
 	}
+
+	bool IsCorrectGift(GameObject clickedGift) {
+		Sprite sp = clickedGift.GetComponent<SpriteRenderer>().sprite;
+		return clickedGift.GetComponent<SpriteRenderer>().sprite == correctSprite;
+	}
+
+	void CleanUp() {
+		GameObject[] gifts = GameObject.FindGameObjectsWithTag("GiftGuess");
+		foreach(GameObject gift in gifts) {
+			Destroy(gift);
+		}
+	}
+
 
 	
 }

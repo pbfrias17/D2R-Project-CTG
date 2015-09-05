@@ -7,28 +7,55 @@ public static class GameManager {
 
 	public static bool miniGameOn;
 	public static string currentMiniGame;
+	public static GameObject currentGameObject;
+	public static SpriteRenderer sr;
 	public static List<string> miniGames = new List<string>();
 	public static string[] strings;
 	public static int currentStage;
+	public static int currentLives;
 
 	// Use this for initialization
-	public static void Init () {
+	public static void Init() {
+		Debug.Log("Starting GameManager...");
+		currentLives = 3;
 		miniGames.Add("GiftGuessing");
+		currentGameObject = new GameObject("background");
+		currentGameObject.transform.localScale = new Vector3(4.1f, 4f, 0f);
+		currentGameObject.AddComponent<SpriteRenderer>();
+		sr = currentGameObject.GetComponent<SpriteRenderer>();
+		sr.sprite = Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg");
 	}
 
 	public static void StartMiniGame() {
 		miniGameOn = true;
 		currentStage = 1;
 		currentMiniGame = miniGames[0];
-		//create object that has proper mini game script
-		GameObject currentGameObject = new GameObject("background");
-		currentGameObject.transform.localScale = new Vector3(4.1f, 4f, 0f);
+		//add script and sprite
 		UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(currentGameObject, "Assets/D2R-Project-CTG/Scripts/GameManager.cs (27,3)", currentMiniGame);
-		currentGameObject.AddComponent<SpriteRenderer>();
-		SpriteRenderer background = currentGameObject.GetComponent<SpriteRenderer>();
-		background.sprite = Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/general/" + currentMiniGame + "bg.jpg");
+		sr.sprite = Resources.Load<Sprite>("Sprites/" + currentMiniGame + "/general/" + currentMiniGame + "bg.jpg");
 
 	}
+
+	public static void EndMiniGame(bool success) {
+		if(success) {
+			Debug.Log("GM: GOOD JOB!");
+			currentStage++;
+		} else {
+			Debug.Log("GM: DARN!");
+			currentLives--;
+			if(currentLives > 0) {
+				currentStage++;
+			} else {
+				GameOver();
+			} 
+		}
+		
+	}
+
+	public static void GameOver() {
+		Debug.Log("GM: g4ME oV3r");
+	}
+
 
 	// Update is called once per frame
 	static void Update () {
