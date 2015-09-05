@@ -26,6 +26,17 @@ public static class GameManager {
 		Util.ApplySpriteToObject(ref currentGameObject, Resources.Load<Sprite>("Sprites/MainMenu/Wallpaper.jpg"));
 	}
 
+	public static void GameLoop() {
+		miniGameOn = true;
+		currentStage = 1;
+		currentMiniGame = miniGames[0];
+		while (currentLives > 0) {
+			StartMiniGame();
+			GiftGuessing gg = currentGameObject.GetComponent<GiftGuessing>();
+			gg.DoneMiniGame();
+		}
+	}
+
 	public static void StartMiniGame() {
 		miniGameOn = true;
 		currentStage = 1;

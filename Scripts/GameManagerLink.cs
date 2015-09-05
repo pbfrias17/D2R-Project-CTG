@@ -14,7 +14,7 @@ public class GameManagerLink : MonoBehaviour {
 
 		//hide main UI and start minigames
 		UI.gameObject.SetActive(false);
-		GameManager.StartMiniGame();
+		GameManager.GameLoop();
 	}
 
 	// Update is called once per frame

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class GiftGuessing : MonoBehaviour {
+public class GiftGuessing : MiniGame {
 
 	private int giftAmt;
 	private string giftType;
@@ -105,6 +105,9 @@ public class GiftGuessing : MonoBehaviour {
 		}
 	}
 
+	public bool DoneMiniGame() {
+		return true;
+	}
 
 	
 }
